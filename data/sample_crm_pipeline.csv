@@ -1,0 +1,5 @@
+Opportunity ID,Created Date,Sales Rep,Account Name,Region,Product,Deal Amount,Sales Stage,Win Probability,Expected Close Date,Status,Industry,Lead Source
+OP-101,2026-01-05,Arun,ABC Ltd,South,CRM,500000,Negotiation,80%,2026-03-15,Open,IT,Website
+OP-102,2026-01-10,Priya,XYZ Ltd,West,Analytics,300000,Proposal,60%,2026-03-20,Open,Banking,Referral
+OP-103,2026-01-12,Rahul,Northwind Traders,North,Cloud,700000,Closed Won,100%,2026-02-20,Won,Retail,Partner
+OP-104,2026-01-14,Sneha,Delta Health,East,Data Platform,250000,Closed Lost,0%,2026-02-25,Lost,Healthcare,LinkedIn

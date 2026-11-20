@@ -1,0 +1,38 @@
+<section id="genericInsights" class="generic-workspace" hidden>
+  <div class="panel generic-intro">
+    <div class="eyebrow">AUTOMATIC DATA EXPLORATION</div>
+    <h2>Insights from your dataset</h2>
+    <p class="muted">No predefined column names or sales-specific template are required. The analysis below is generated from the fields and values found in the uploaded file. Click a chart bar or month to filter the full view.</p>
+    <div id="genericSelectionHint" class="generic-selection-hint" aria-live="polite">All records are included.</div>
+  </div>
+  <section class="generic-kpis" id="genericKpis"></section>
+  <section class="panel">
+    <div class="panel-heading"><div><h2>Key findings</h2><p>Automatically generated from the current filtered data.</p></div></div>
+    <ul id="genericInsightList" class="generic-insight-list"></ul>
+  </section>
+  <section class="chart-grid">
+    <article class="panel panel-large">
+      <div class="panel-heading"><div><h2 id="genericTrendTitle">Time trend</h2><p id="genericTrendSubtitle">Grouped by month when a date column is available.</p></div></div>
+      <div class="chart-area"><div id="genericTrendChart" class="chart-canvas"></div></div>
+    </article>
+    <article class="panel">
+      <div class="panel-heading"><div><h2>Data quality</h2><p>Completeness and duplicate checks.</p></div></div>
+      <div id="genericQuality" class="quality-grid"></div>
+    </article>
+  </section>
+  <section class="panel">
+    <div class="panel-heading"><div><h2>Explore categories</h2><p>Category charts show record counts or the sum of the most useful numeric field. Click a bar to cross-filter.</p></div></div>
+    <div id="genericCategoryCharts" class="generic-chart-grid"></div>
+  </section>
+  <section class="panel">
+    <div class="panel-heading"><div><h2>Numeric field summary</h2><p>Count, total, average, median, minimum and maximum for detected numeric columns.</p></div></div>
+    <div class="table-wrap"><table class="data-table"><thead><tr><th>Field</th><th>Values</th><th>Total</th><th>Average</th><th>Median</th><th>Minimum</th><th>Maximum</th></tr></thead><tbody id="genericNumericBody"></tbody></table></div>
+  </section>
+  <section class="panel">
+    <div class="panel-heading"><div><h2>Column profile</h2><p>Detected data type, filled values, blank values and distinct values.</p></div></div>
+    <div class="table-wrap"><table class="data-table"><thead><tr><th>Column</th><th>Detected type</th><th>Non-empty</th><th>Missing</th><th>Distinct</th></tr></thead><tbody id="genericProfileBody"></tbody></table></div>
+  </section>
+  <section class="panel">
+    <div class="panel-heading"><div><h2>Record explorer</h2><p>Search all uploaded columns in the Opportunities page.</p></div><a class="btn btn-small btn-light" href="{{ url_for('opportunities') }}">Open full data table →</a></div>
+  </section>
+</section>

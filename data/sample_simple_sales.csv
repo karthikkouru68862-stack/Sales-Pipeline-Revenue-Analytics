@@ -1,0 +1,6 @@
+Order Date;Salesperson;Customer Name;Product Name;Territory;Industry;Quantity;Unit Price;Sales;Order Status
+2026-01-10;Arun;ABC Ltd;CRM Software;South;IT;2;25.000,00;50.000,00;Completed
+2026-01-11;Priya;XYZ Ltd;Analytics Suite;West;Banking;1;42.000,00;42.000,00;Paid
+2026-01-12;Rahul;PQR Ltd;ERP;North;Retail;3;1.234,50;3.703,50;Completed
+2026-01-13;Sneha;Cancelled Ltd;CRM;South;IT;1;500,00;500,00;Cancelled
+2026-01-14;Vikram;Refunded Ltd;Analytics;East;IT;1;300,00;300,00;Refunded

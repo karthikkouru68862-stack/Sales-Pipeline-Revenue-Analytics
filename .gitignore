@@ -1,0 +1,18 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Secret files
+.env
+
+# User database and sessions
+instance/
+*.db
+
+# Uploaded customer datasets
+uploads/
+
+# Admin recovery utilities
+repair_demo_logins.py
+reset_admin_password.py

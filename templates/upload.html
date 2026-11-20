@@ -1,0 +1,42 @@
+{% extends 'base.html' %}{% block title %}Upload Data{% endblock %}{% block page_heading %}Data management{% endblock %}{% block page_subtitle %}Upload a CSV with any columns. The website profiles the data and generates insights automatically.{% endblock %}{% block content %}
+<section class="upload-layout">
+  <article class="panel upload-main">
+    <div class="upload-illustration">⇧</div>
+    <div class="eyebrow">ADMIN ONLY</div>
+    <h2>Upload any dataset</h2>
+    <p class="muted">No required columns, fixed template or manual mapping. Upload any tabular CSV with a header row and data rows. SalesPulse detects dates, numbers and categories, then builds summaries and insights from the fields it finds.</p>
+    <form method="post" enctype="multipart/form-data" class="upload-form" id="uploadForm"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label class="drop-zone" for="csvFile">
+        <span class="drop-icon">＋</span>
+        <b>Choose your CSV dataset</b>
+        <small>CSV file · 15 MB maximum · UTF-8 preferred</small>
+        <input id="csvFile" name="file" type="file" accept=".csv,text/csv" required>
+      </label>
+      <div id="fileName" class="file-name" role="status" aria-live="polite">No file selected</div>
+      <button class="btn btn-primary full-btn" type="submit">Upload and analyze dataset →</button>
+      <p class="upload-warning">Uploads are temporary. Your original bundled dataset is preserved separately. After uploading, the Overview page shows insights from the new file; use “Remove uploaded data” on Overview to restore the original dataset.</p>
+    </form>
+  </article>
+  <aside class="panel schema-panel">
+    <h3>No required columns</h3>
+    <p class="muted">The uploader examines each column's values and infers whether it contains numbers, dates, categories or text. Examples of analyses it may generate:</p>
+    <div class="auto-detect-examples">
+      <div><b>Numeric fields</b><span>Totals, averages, ranges, medians and distributions</span></div>
+      <div><b>Date fields</b><span>Time coverage and monthly trends</span></div>
+      <div><b>Category fields</b><span>Most common values and group comparisons</span></div>
+      <div><b>Text fields</b><span>Distinct values, completeness and profile summaries</span></div>
+      <div><b>Data quality</b><span>Blank cells and duplicate rows</span></div>
+      <div><b>Interactive exploration</b><span>Click chart values to filter other insights</span></div>
+    </div>
+    <div class="info-note"><b>What is the minimum?</b><p>A header row and at least one data row. There is no required column name, sales amount, date or category.</p></div>
+    <div class="info-note info-note-soft"><b>Sales-specific analysis</b><p>When familiar sales or CRM fields are present, SalesPulse also shows relevant sales KPIs. When they are absent, it does not invent them; it analyzes the available columns instead.</p></div>
+  </aside>
+</section>
+{% if dataset_meta and dataset_meta.get('row_count') %}
+<section class="panel detected-panel">
+  <div class="panel-heading"><div><h2>Active dataset</h2><p>{% if dataset_meta.get('source') == 'Uploaded by administrator' %}Currently analyzing the administrator-uploaded dataset. Remove it from Overview to restore the original.{% else %}Currently analyzing the original bundled starter dataset. It remains preserved when you upload another file.{% endif %}</p></div><span class="panel-tag">{{ dataset_meta.get('data_type', 'Sales dataset') }}</span></div>
+  <div class="detected-stats"><div><span>Accepted rows</span><b>{{ '{:,}'.format(dataset_meta.get('row_count', 0)) }}</b></div><div><span>Skipped rows</span><b>{{ '{:,}'.format(dataset_meta.get('skipped_rows', 0)) }}</b></div><div><span>File</span><b>{{ dataset_meta.get('original_filename', 'Current dataset') }}</b></div><div><span>Source / last upload</span><b>{{ dataset_meta.get('uploaded_at') or dataset_meta.get('source', '—') }}</b></div></div>
+  {% if dataset_meta.get('generic_schema', {}).get('profiles') %}<h3 class="detected-title">Column profile</h3><div class="schema-list">{% for profile in dataset_meta.get('generic_schema', {}).get('profiles', []) %}<span>{{ profile.name }} · {{ profile.type }}</span>{% endfor %}</div>{% elif dataset_meta.get('detected_columns') %}<h3 class="detected-title">Detected columns</h3><div class="schema-list">{% for key, value in dataset_meta.get('detected_columns', {}).items() %}<span>{{ key }} ← {{ value }}</span>{% endfor %}</div>{% endif %}
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,25 @@
+{
+  "data_type": "CRM sales pipeline",
+  "detected_columns": {
+    "Deal_ID": "Deal_ID",
+    "Lead_Date": "Lead_Date",
+    "Salesperson": "Salesperson",
+    "Company": "Company",
+    "Industry": "Industry",
+    "Region": "Region",
+    "Product": "Product",
+    "Deal_Value": "Deal_Value",
+    "Stage": "Stage",
+    "Probability": "Probability",
+    "Expected_Close_Date": "Expected_Close_Date",
+    "Actual_Close_Date": "Actual_Close_Date",
+    "Status": "Status",
+    "Revenue": "Revenue",
+    "Lead_Source": "Lead_Source"
+  },
+  "row_count": 5000,
+  "original_filename": "sales_pipeline_clean.csv",
+  "uploaded_at": "",
+  "source": "Bundled starter dataset",
+  "skipped_rows": 0
+}

@@ -1,0 +1,17 @@
+<section class="filter-panel" aria-label="Dashboard filters">
+  <div class="filter-title"><div><b>Filter your view</b><small>Closed deals use actual close/transaction date; open deals use expected close date (or lead date when unavailable).</small></div><button type="button" class="btn btn-small btn-light" id="resetFilters">Reset filters</button></div>
+  <div class="filter-grid">
+    <div class="field"><label for="startDate">Close / transaction date from</label><input id="startDate" type="date"></div>
+    <div class="field"><label for="endDate">Close / transaction date to</label><input id="endDate" type="date"></div>
+    {% if user.role == 'admin' %}
+      <div class="field"><label for="regionFilter">Region</label><select id="regionFilter"><option value="All">All regions</option>{% for val in options.regions %}<option value="{{ val }}">{{ val }}</option>{% endfor %}</select></div>
+      <div class="field"><label for="personFilter">Salesperson</label><select id="personFilter"><option value="All">All salespeople</option>{% for val in options.salespeople %}<option value="{{ val }}">{{ val }}</option>{% endfor %}</select></div>
+    {% endif %}
+    <div class="field"><label for="productFilter">Product</label><select id="productFilter"><option value="All">All products</option>{% for val in options.products %}<option value="{{ val }}">{{ val }}</option>{% endfor %}</select></div>
+    <div class="field"><label for="industryFilter">Industry</label><select id="industryFilter"><option value="All">All industries</option>{% for val in options.industries %}<option value="{{ val }}">{{ val }}</option>{% endfor %}</select></div>
+    <div class="field"><label for="sourceFilter">Lead source</label><select id="sourceFilter"><option value="All">All sources</option>{% for val in options.lead_sources %}<option value="{{ val }}">{{ val }}</option>{% endfor %}</select></div>
+  </div>
+  <div id="interactiveSelection" class="interactive-selection" hidden><span id="interactiveSelectionText"></span><button type="button" id="clearChartSelection" class="btn btn-small btn-light">Clear chart selection</button></div>
+</section>
+<div class="dataset-notice" id="datasetNotice" role="status" aria-live="polite"></div>
+<div class="load-state" id="loadState" role="status" aria-live="polite">Loading analytics…</div>

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Revenue Analytics{% endblock %}
+{% block page_heading %}Revenue analytics{% endblock %}
+{% block page_subtitle %}Analyze available data fields, sales trends and revenue performance.{% endblock %}
+{% block content %}
+<div id="salesDashboardContent">
+{% include '_filters.html' %}
+<section class="kpi-grid kpi-grid-4">
+  <article class="kpi-card"><span>Total revenue</span><strong id="kpiRevenue">—</strong><small>Realized sales revenue</small></article>
+  <article class="kpi-card"><span>Average sale / deal</span><strong id="kpiAverage">—</strong><small>Average closed sale value</small></article>
+  <article class="kpi-card"><span>Win rate</span><strong id="kpiWinRate">—</strong><small>Available for CRM pipeline data</small></article>
+  <article class="kpi-card"><span>Average sales cycle</span><strong id="kpiCycle">—</strong><small>Days from lead to close</small></article>
+</section>
+<section class="chart-grid">
+  <article class="panel panel-large"><div class="panel-heading"><div><h2>Monthly revenue trend</h2><p>Hover for exact revenue; click a month to filter the page.</p></div></div><div class="chart-area"><div id="monthlyChart" class="chart-canvas" role="img" aria-label="Monthly revenue chart"></div></div></article>
+  <article class="panel"><div class="panel-heading"><div><h2>Regional revenue</h2><p>Click a region to cross-filter.</p></div></div><div class="chart-area"><div id="regionChart" class="chart-canvas" role="img" aria-label="Regional revenue chart"></div></div></article>
+</section>
+<section class="chart-grid">
+  <article class="panel"><div class="panel-heading"><div><h2>Revenue by industry</h2><p>Click an industry to cross-filter the workspace.</p></div></div><div class="chart-area"><div id="industryChart" class="chart-canvas"></div></div></article>
+  <article class="panel"><div class="panel-heading"><div><h2>Revenue by lead source</h2><p>Click a source to cross-filter the workspace.</p></div></div><div class="chart-area"><div id="sourceChart" class="chart-canvas"></div></div></article>
+</section>
+<section class="panel"><div class="panel-heading"><div><h2>Regional revenue snapshot</h2><p>Select a region card to cross-filter the revenue visualizations.</p></div></div><div id="regionCards" class="region-grid"></div></section>
+</div>
+{% include '_generic_insights.html' %}
+{% endblock %}

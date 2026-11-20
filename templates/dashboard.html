@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Overview{% endblock %}
+{% block page_heading %}Overview dashboard{% endblock %}
+{% block page_subtitle %}Explore the active dataset and the insights generated from its available fields.{% endblock %}
+{% block content %}
+{% if has_uploaded_dataset %}
+<section class="panel dataset-source-panel uploaded-source-panel">
+  <div class="dataset-source-copy">
+    <span class="panel-tag">UPLOADED DATASET ACTIVE</span>
+    <h2>{{ active_dataset_meta.get('original_filename', 'Uploaded dataset') }}</h2>
+    <p>These dashboard insights are generated from your uploaded dataset. The original bundled dataset is safely preserved and will return when this upload is removed.</p>
+    <small>{{ '{:,}'.format(active_dataset_meta.get('row_count', 0)) }} rows · Uploaded {{ active_dataset_meta.get('uploaded_at', '—') }}</small>
+  </div>
+  {% if user.role == 'admin' %}
+  <form method="post" action="{{ url_for('remove_uploaded_dataset') }}" onsubmit="return confirm('Remove the uploaded dataset and restore the original bundled dataset?');">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <button class="btn btn-danger" type="submit">Remove uploaded data</button>
+  </form>
+  {% else %}
+  <span class="panel-tag">MANAGED BY ADMIN</span>
+  {% endif %}
+</section>
+{% else %}
+<section class="panel dataset-source-panel original-source-panel">
+  <div class="dataset-source-copy">
+    <span class="panel-tag">ORIGINAL DATASET ACTIVE</span>
+    <h2>Bundled starter dataset</h2>
+    <p>The original project dataset is currently being analyzed. Upload a new CSV from Data Management to temporarily view insights from another dataset.</p>
+  </div>
+</section>
+{% endif %}
+<div id="salesDashboardContent">
+  {% include '_filters.html' %}
+  <section class="kpi-grid"><article class="kpi-card"><span>Total revenue</span><strong id="kpiRevenue">—</strong><small>Realized sales revenue</small></article><article class="kpi-card"><span>Pipeline value</span><strong id="kpiPipeline">—</strong><small>Open opportunity value</small></article><article class="kpi-card"><span>Expected revenue</span><strong id="kpiExpected">—</strong><small>Probability weighted</small></article><article class="kpi-card"><span>Win rate</span><strong id="kpiWinRate">—</strong><small>Won ÷ closed deals</small></article><article class="kpi-card"><span>Loss rate</span><strong id="kpiLossRate">—</strong><small>Lost ÷ closed deals</small></article><article class="kpi-card"><span>Conversion rate</span><strong id="kpiConversion">—</strong><small>Won ÷ all opportunities</small></article></section>
+  <section class="stat-strip"><div><span id="labelOpen">Open deals</span><b id="kpiOpen">—</b></div><div><span id="labelLost">Lost deals</span><b id="kpiLost">—</b></div><div><span id="labelWon">Won deals</span><b id="kpiWon">—</b></div><div><span id="labelAverage">Average deal size</span><b id="kpiAverage">—</b></div><div><span>Average sales cycle</span><b id="kpiCycle">—</b></div><div><span id="labelTotal">Total opportunities</span><b id="kpiTotal">—</b></div><div><span>Overdue open deals</span><b id="kpiOverdue">—</b></div><div><span>Overdue pipeline value</span><b id="kpiOverdueValue">—</b></div></section>
+  <section class="chart-grid"><article class="panel panel-large"><div class="panel-heading"><div><h2>Monthly revenue</h2><p>Hover for exact value; click a month to filter all charts.</p></div><span class="panel-tag">TREND</span></div><div class="chart-area"><div id="monthlyChart" class="chart-canvas" role="img" aria-label="Monthly revenue chart"></div></div></article><article class="panel"><div class="panel-heading"><div><h2>Deal outcomes</h2><p>Click a segment to cross-filter the workspace.</p></div></div><div class="chart-area chart-short"><div id="outcomesChart" class="chart-canvas" role="img" aria-label="Deal outcome chart"></div></div></article></section>
+  <section class="chart-grid"><article class="panel"><div class="panel-heading"><div><h2>Revenue by product</h2><p>Click a bar to explore the selected product.</p></div></div><div class="chart-area"><div id="productChart" class="chart-canvas"></div></div></article><article class="panel"><div class="panel-heading"><div><h2>Revenue by lead source</h2><p>Click a source to cross-filter the workspace.</p></div></div><div class="chart-area"><div id="sourceChart" class="chart-canvas"></div></div></article></section>
+  <section class="chart-grid"><article class="panel"><div class="panel-heading"><div><h2>Revenue by salesperson</h2><p>Click a salesperson to focus the dashboard.</p></div></div><div class="chart-area"><div id="salespersonChart" class="chart-canvas"></div></div></article><article class="panel"><div class="panel-heading"><div><h2>Revenue by region</h2><p>Click a region to cross-filter all visuals.</p></div></div><div class="chart-area"><div id="regionChart" class="chart-canvas"></div></div></article></section>
+</div>
+{% include '_generic_insights.html' %}
+{% endblock %}

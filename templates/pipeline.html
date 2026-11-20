@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Sales Pipeline{% endblock %}
+{% block page_heading %}Sales pipeline{% endblock %}
+{% block page_subtitle %}Explore opportunity stages and weighted pipeline value when the dataset contains CRM fields.{% endblock %}
+{% block content %}
+<div id="salesDashboardContent">
+{% include '_filters.html' %}
+<section class="kpi-grid kpi-grid-4">
+  <article class="kpi-card"><span>Open pipeline</span><strong id="kpiPipeline">—</strong><small>Current open deal value</small></article>
+  <article class="kpi-card"><span>Expected revenue</span><strong id="kpiExpected">—</strong><small>Value × close probability</small></article>
+  <article class="kpi-card"><span>Open deals</span><strong id="kpiOpen">—</strong><small>Active opportunities</small></article>
+  <article class="kpi-card"><span>Conversion rate</span><strong id="kpiConversion">—</strong><small>Won ÷ all opportunities</small></article>
+  <article class="kpi-card"><span>Overdue open deals</span><strong id="kpiOverdue">—</strong><small>Expected close date is in the past</small></article>
+  <article class="kpi-card"><span>Overdue pipeline value</span><strong id="kpiOverdueValue">—</strong><small>Shown separately from active pipeline</small></article>
+</section>
+<section class="panel"><div class="panel-heading"><div><h2>Pipeline funnel</h2><p>Stages follow the business sequence. Select a stage to filter other visuals.</p></div><span class="panel-tag">OPEN OPPORTUNITIES</span></div><div id="pipelineFunnel" class="funnel-wrap"><div class="skeleton">Loading pipeline…</div></div></section>
+<section class="chart-grid"><article class="panel"><div class="panel-heading"><div><h2>Open value by stage</h2><p>Hover for exact values; click a bar to cross-filter.</p></div></div><div class="chart-area"><div id="stageChart" class="chart-canvas"></div></div></article><article class="panel"><div class="panel-heading"><div><h2>Pipeline by region</h2><p>Open opportunities within your permitted scope.</p></div></div><div class="chart-area"><div id="regionPipelineChart" class="chart-canvas"></div></div></article></section>
+</div>
+{% include '_generic_insights.html' %}
+{% endblock %}
